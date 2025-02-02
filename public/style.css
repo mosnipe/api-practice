@@ -1,6 +1,7 @@
+/* Googleフォント適用 */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'M PLUS Rounded 1c', Arial, sans-serif;
   background: #f5f5f5;
   color: #333;
 }
@@ -14,6 +15,8 @@ header {
 
 h1 {
   margin: 0;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 main {
@@ -30,19 +33,33 @@ section {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   width: 300px;
+  text-align: center;
 }
 
+/* ボタンを中央に配置 */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* ボタン間の間隔 */
+  margin-top: 10px;
+}
+
+/* ボタンのスタイル */
 button {
-  background: #4caf50;
+  background: #ff9800;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
 button:hover {
-  background: #45a049;
+  background: #fb8c00;
+  transform: scale(1.05);
 }
 
 ul {
@@ -53,4 +70,36 @@ ul {
 li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* フォームのスタイル */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 90%;
+  padding: 8px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'M PLUS Rounded 1c', Arial, sans-serif;
+}
+
+input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+footer {
+  background: #4caf50;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
 }

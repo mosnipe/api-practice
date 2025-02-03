@@ -49,7 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
       list.innerHTML = '';
       data.forEach((char) => {
         const li = document.createElement('li');
-        li.textContent = `ID: ${char.id}, 名前: ${char.name}, 特徴: ${char.description}`;
+        li.innerHTML = `
+          <strong>ID：</strong> ${char.id} <br>
+          <strong>名前：</strong> ${char.name} <br>
+          <strong>特徴：</strong> ${char.description} <br>
+        `;
+        li.style.textAlign = "left";
         list.appendChild(li);
       });
     } catch (err) {

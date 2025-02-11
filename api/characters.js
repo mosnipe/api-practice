@@ -11,13 +11,13 @@ let currentId = 1;
 
 // ✅ キャラクター一覧を取得
 app.get('/api/characters', (req, res) => {
-  console.log("📥 GET /api/characters - Ver 2.02");
+  console.log("📥 GET /api/characters - Ver 3.00");
   res.json(characters);
 });
 
 // ✅ キャラクターを追加
 app.post('/api/characters', (req, res) => {
-  console.log("📥 POST /api/characters - Ver 2.02");
+  console.log("📥 POST /api/characters - Ver 3.00");
 
   const { name, description } = req.body;
   if (!name || !description) {
@@ -27,7 +27,7 @@ app.post('/api/characters', (req, res) => {
   const newCharacter = { id: currentId++, name, description };
   characters.push(newCharacter);
 
-  console.log(`✅ Ver 2.02 - 追加成功: ${JSON.stringify(newCharacter)}`);
+  console.log(`✅ Ver 3.00 - 追加成功: ${JSON.stringify(newCharacter)}`);
   res.status(201).json(newCharacter);
 });
 

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ? 'http://localhost:3000/api/characters'
     : 'https://api-practice-murex.vercel.app/api/characters';
 
-  console.log(`🔍 Ver 2.02 - 使用するAPIエンドポイント: ${API_BASE}`);
+  console.log(`🔍 Ver 3.00 - 使用するAPIエンドポイント: ${API_BASE}`);
 
   async function fetchCharacters() {
     try {
@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const res = await fetch(API_BASE);
       if (!res.ok) {
-        throw new Error(`⚠️ Ver 2.02 - HTTPエラー: ${res.status}`);
+        throw new Error(`⚠️ Ver 3.00 - HTTPエラー: ${res.status}`);
       }
 
       const data = await res.json();
       renderCharacterList(data);
     } catch (err) {
-      console.error(`❌ Ver 2.02 - キャラクター一覧取得エラー:`, err);
-      alert('⚠️ Ver 2.02 - キャラクター一覧を取得できませんでした。');
+      console.error(`❌ Ver 3.00 - キャラクター一覧取得エラー:`, err);
+      alert('⚠️ Ver 3.00 - キャラクター一覧を取得できませんでした。');
     } finally {
       getButton.disabled = false;
     }

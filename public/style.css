@@ -36,7 +36,54 @@ main {
   padding: 20px;
 }
 
-/* ボタンのスタイル */
+section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* ✅ フォームデザインの修正 */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* ✅ 入力欄のデザイン */
+input {
+  width: 90%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'M PLUS Rounded 1c', Arial, sans-serif;
+}
+
+input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* ✅ ボタンのデザイン */
 .button-container {
   display: flex;
   justify-content: center;
@@ -61,7 +108,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* キャラクター一覧 */
+/* ✅ キャラクター一覧 */
 ul {
   list-style-type: none;
   padding: 0;
@@ -75,7 +122,7 @@ li {
   font-weight: 400;
 }
 
-/* フッター */
+/* ✅ フッター */
 footer {
   text-align: center;
   padding: 10px;

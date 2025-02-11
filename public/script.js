@@ -3,30 +3,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const getButton = document.getElementById('get-characters-btn');
   const list = document.getElementById('characters-list');
 
-  // ✅ 本番環境のAPIエンドポイントを固定
+  // APIエンドポイント
   const API_BASE = 'https://api-practice-murex.vercel.app/api/characters';
-
-  console.log(`🔍 Ver 2.03 - 使用するAPIエンドポイント: ${API_BASE}`);
 
   async function fetchCharacters() {
     try {
-      console.log("📥 GETリクエスト送信中:", API_BASE);
       getButton.disabled = true;
-
       const res = await fetch(API_BASE);
       if (!res.ok) {
-        throw new Error(`⚠️ HTTPエラー: ${res.status}`);
+        throw new Error(`HTTPエラー: ${res.status}`);
       }
-
       const data = await res.json();
+      // ここで renderCharacterList を呼び出す
       renderCharacterList(data);
     } catch (err) {
-      console.error(`❌ キャラクター一覧取得エラー:`, err);
-      alert('⚠️ キャラクター一覧を取得できませんでした。');
+      console.error('キャラクター一覧取得エラー:', err);
+      alert('キャラクター一覧を取得できませんでした。');
     } finally {
       getButton.disabled = false;
     }
   }
 
+  // 🎯 これが必要
+  function renderCharacterList(data) {
+    // 一覧表示のロジック
+    list.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      list.innerHTML = '<li>キャラクターが登録されていません。</li>';
+      return;
+    }
+
+    data.forEach((char) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <strong>ID：</strong> ${char.id} <br>
+        <strong>名前：</strong> ${char.name} <br>
+        <strong>特徴：</strong> ${char.description} <br>
+      `;
+      li.style.textAlign = "left";
+      list.appendChild(li);
+    });
+  }
+
+  // ページロード時に一覧取得
   fetchCharacters();
 });

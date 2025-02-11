@@ -1,16 +1,9 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/characters.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/characters",
-        "dest": "api/characters.js"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/characters",
+      "dest": "/api/characters.js"
+    }
+  ]
+}

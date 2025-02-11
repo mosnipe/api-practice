@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const getButton = document.getElementById('get-characters-btn');
   const list = document.getElementById('characters-list');
 
-  // ✅ APIエンドポイント（Vercel & ローカルで自動切り替え）
+  // ✅ APIエンドポイント（本番環境固定）
   const API_BASE = window.location.hostname.includes('localhost')
     ? 'http://localhost:3000/api/characters'
-    : 'https://api-practice-p0tufedoq-mosnipes-projects.vercel.app/api/characters';
+    : 'https://api-practice-murex.vercel.app/api/characters';
 
-  console.log(`🔍 Ver 2.00 - 使用するAPIエンドポイント: ${API_BASE}`);
+  console.log(`🔍 Ver 2.01 - 使用するAPIエンドポイント: ${API_BASE}`);
 
   async function fetchCharacters() {
     try {
@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const res = await fetch(API_BASE);
       if (!res.ok) {
-        throw new Error(`⚠️ HTTPエラー: ${res.status}`);
+        throw new Error(`⚠️ Ver 2.01 - HTTPエラー: ${res.status}`);
       }
 
       const data = await res.json();
       renderCharacterList(data);
     } catch (err) {
-      console.error(`❌ [Ver 2.00] キャラクター一覧取得エラー:`, err);
-      alert('⚠️ Ver 2.00 - キャラクター一覧を取得できませんでした。');
+      console.error(`❌ Ver 2.01 - キャラクター一覧取得エラー:`, err);
+      alert('⚠️ Ver 2.01 - キャラクター一覧を取得できませんでした。');
     } finally {
       getButton.disabled = false;
     }

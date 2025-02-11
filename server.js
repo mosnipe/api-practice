@@ -2,12 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+// 環境変数の設定
+const API_BASE = process.env.API_BASE || 'http://localhost:3000/api-practice/characters';
+const CORS_ORIGIN = process.env.CORS_ORIGIN || 'https://api-practice-murex.vercel.app';
+
 // メモリ内データストレージ
 let characters = [];
 let currentId = 1;
 
-// CORS設定（すべてのオリジンを許可）
-app.use(cors());
+// CORS設定（環境変数で許可するオリジンを指定）
+app.use(cors({
+  origin: CORS_ORIGIN,
+  credentials: true
+}));
 
 // JSONボディの解析を有効化
 app.use(express.json());
@@ -37,5 +44,6 @@ app.use('/', express.static('public'));
 // サーバー起動
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
+  console.log(`API Base URL: ${API_BASE}`);
 });

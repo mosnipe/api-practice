@@ -1,31 +1,26 @@
 const express = require('express');
 const cors = require('cors');
+
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-const CORS_ORIGIN = process.env.CORS_ORIGIN || 'https://api-practice-murex.vercel.app';
-
+// メモリ内データストレージ（仮のデータ）
 let characters = [];
 let currentId = 1;
 
-// ✅ CORS 設定
-app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
-
-// ✅ JSONボディの解析を有効化
-app.use(express.json());
-
-// ✅ APIエンドポイント
+// ✅ キャラクター一覧を取得
 app.get('/api/characters', (req, res) => {
   console.log("📥 GET /api/characters - Ver 2.02");
   res.json(characters);
 });
 
+// ✅ キャラクターを追加
 app.post('/api/characters', (req, res) => {
   console.log("📥 POST /api/characters - Ver 2.02");
-  
+
   const { name, description } = req.body;
   if (!name || !description) {
-    console.error("❌ Ver 2.02 - エラー: 名前と特徴が必要");
     return res.status(400).json({ error: 'Name and description are required.' });
   }
 
@@ -36,7 +31,4 @@ app.post('/api/characters', (req, res) => {
   res.status(201).json(newCharacter);
 });
 
-// ✅ サーバー起動
-app.listen(PORT, () => {
-  console.log(`🚀 Ver 2.02 - Server is running on port ${PORT}`);
-});
+module.exports = app;

@@ -3,47 +3,48 @@ const cors = require('cors');
 const app = express();
 
 // 環境変数の設定
-const API_BASE = process.env.API_BASE || 'http://localhost:3000/api-practice/characters';
+const PORT = process.env.PORT || 3000;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || 'https://api-practice-murex.vercel.app';
 
-// メモリ内データストレージ
+// メモリ内データストレージ（仮のデータ）
 let characters = [];
 let currentId = 1;
 
-// CORS設定（環境変数で許可するオリジンを指定）
+// ✅ CORS設定（特定のオリジンのみ許可）
 app.use(cors({
   origin: CORS_ORIGIN,
   credentials: true
 }));
 
-// JSONボディの解析を有効化
+// ✅ JSONボディの解析を有効化
 app.use(express.json());
 
-// APIエンドポイント
-
-// 全キャラクター取得
-app.get('/api-practice/characters', (req, res) => {
+// ✅ APIエンドポイント
+app.get('/api/characters', (req, res) => {
+  console.log("📥 GET /api/characters - キャラクター一覧を取得");
   res.json(characters);
 });
 
-// キャラクター登録
-app.post('/api-practice/characters', (req, res) => {
+app.post('/api/characters', (req, res) => {
+  console.log("📥 POST /api/characters - キャラクターを追加");
+  
   const { name, description } = req.body;
   if (!name || !description) {
+    console.error("❌ エラー: 名前と特徴が必要");
     return res.status(400).json({ error: 'Name and description are required.' });
   }
 
   const newCharacter = { id: currentId++, name, description };
   characters.push(newCharacter);
+
+  console.log(`✅ 追加成功: ${JSON.stringify(newCharacter)}`);
   res.status(201).json(newCharacter);
 });
 
-// 静的ファイル配信
-app.use('/', express.static('public'));
+// ✅ 静的ファイル配信
+app.use(express.static('public'));
 
-// サーバー起動
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-  console.log(`API Base URL: ${API_BASE}`);
+// ✅ サーバー起動
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
 });

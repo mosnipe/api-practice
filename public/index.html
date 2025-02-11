@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>キャラクターAPIデモ</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>キャラクター管理</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>キャラクター管理 (デモ)</h1>
+    <h1>キャラクター管理アプリ</h1>
   </header>
 
   <main>
@@ -18,13 +17,12 @@
       <form id="add-character-form">
         <div class="form-group">
           <label for="name">名前:</label>
-          <input type="text" id="name" name="name" placeholder="キャラクター名" required />
+          <input type="text" id="name" name="name" placeholder="キャラクター名" required>
         </div>
         <div class="form-group">
           <label for="description">特徴:</label>
-          <input type="text" id="description" name="description" placeholder="特徴" required />
+          <input type="text" id="description" name="description" placeholder="特徴" required>
         </div>
-        <!-- 追加ボタンを中央寄せ -->
         <div class="button-container">
           <button type="submit" class="submit-btn">追加</button>
         </div>
@@ -33,7 +31,6 @@
 
     <section class="list-section">
       <h2>キャラクター一覧</h2>
-      <!-- 一覧取得ボタンを中央寄せ -->
       <div class="button-container">
         <button id="get-characters-btn" class="action-btn">一覧取得</button>
       </div>
@@ -42,9 +39,7 @@
   </main>
 
   <footer>
-    <div class="footer">
-      <p>© Demo by mosnipe</p>
-    </div>
+    <p>© 2024 キャラクター管理アプリ</p>
   </footer>
 
   <script src="script.js"></script>

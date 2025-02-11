@@ -1,15 +1,18 @@
-/* Googleフォント適用 */
+/* Googleフォント */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap');
+
 body {
   margin: 0;
   font-family: 'M PLUS Rounded 1c', Arial, sans-serif;
   background: #f5f5f5;
   color: #333;
+  text-align: center;
 }
 
 header {
   background: #4caf50;
   color: white;
-  padding: 10px 0;
+  padding: 15px 0;
   text-align: center;
 }
 
@@ -32,19 +35,19 @@ section {
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  width: 300px;
+  width: 100%;
+  max-width: 400px;
   text-align: center;
 }
 
-/* ボタンを中央に配置 */
+/* ボタンのスタイル */
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 10px; /* ボタン間の間隔 */
+  gap: 10px;
   margin-top: 10px;
 }
 
-/* ボタンのスタイル */
 button {
   background: #ff9800;
   color: white;
@@ -62,19 +65,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-/* フォームのスタイル */
+/* 入力フォーム */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -84,7 +75,7 @@ li {
 
 input {
   width: 90%;
-  padding: 8px;
+  padding: 10px;
   border: 2px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
@@ -97,9 +88,24 @@ input:focus {
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
+/* キャラクター一覧 */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* フッター */
 footer {
-  background: #4caf50;
-  color: white;
-  padding: 10px 0;
   text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #666;
 }

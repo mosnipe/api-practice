@@ -3,12 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const getButton = document.getElementById('get-characters-btn');
   const list = document.getElementById('characters-list');
 
-  // ✅ APIエンドポイント（Vercel本番環境に対応）
-  const API_BASE = 'https://api-practice-murex.vercel.app/api-practice/characters';
+  // ✅ APIエンドポイント（環境変数で自動切り替え）
+  const API_BASE = window.location.hostname.includes('localhost')
+    ? 'http://localhost:3000/api/characters'
+    : 'https://api-practice-murex.vercel.app/api/characters';
 
-  // キャラクター追加処理
+  console.log(`使用するAPIエンドポイント: ${API_BASE}`);
+
+  /**
+   * キャラクター追加処理
+   */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const name = form.name.value.trim();
     const description = form.description.value.trim();
 
@@ -18,55 +25,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      console.log("POSTリクエスト送信中:", API_BASE); // デバッグ用ログ
+      console.log("POSTリクエスト送信中:", API_BASE);
+      form.querySelector('button[type="submit"]').disabled = true;
 
       const res = await fetch(API_BASE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description }),
-        mode: 'cors' // ✅ スマホのCORSエラー対策
+        mode: 'cors'
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        alert(`追加しました: ${data.name}`);
-        form.reset();
-      } else {
-        const error = await res.json();
-        alert(`エラー: ${error.error}`);
-      }
-    } catch (err) {
-      console.error("サーバーへの接続エラー:", err);
-      alert('サーバーに接続できませんでした。');
-    }
-  });
-
-  // キャラクター一覧取得処理
-  getButton.addEventListener('click', async () => {
-    try {
-      console.log("GETリクエスト送信中:", API_BASE); // デバッグ用ログ
-
-      const res = await fetch(API_BASE, { mode: 'cors' }); // ✅ CORSを明示
       if (!res.ok) {
         throw new Error(`HTTP error: ${res.status}`);
       }
 
       const data = await res.json();
-      list.innerHTML = '';
+      alert(`追加しました: ${data.name}`);
+      form.reset();
+      fetchCharacters(); // 追加後に自動更新
+    } catch (err) {
+      console.error("キャラクター追加エラー:", err);
+      alert('サーバーに接続できませんでした。');
+    } finally {
+      form.querySelector('button[type="submit"]').disabled = false;
+    }
+  });
 
-      data.forEach((char) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <strong>ID：</strong> ${char.id} <br>
-          <strong>名前：</strong> ${char.name} <br>
-          <strong>特徴：</strong> ${char.description} <br>
-        `;
-        li.style.textAlign = "left";
-        list.appendChild(li);
-      });
+  /**
+   * キャラクター一覧取得処理
+   */
+  getButton.addEventListener('click', fetchCharacters);
+
+  async function fetchCharacters() {
+    try {
+      console.log("GETリクエスト送信中:", API_BASE);
+      getButton.disabled = true;
+
+      const res = await fetch(API_BASE, { mode: 'cors' });
+      if (!res.ok) {
+        throw new Error(`HTTP error: ${res.status}`);
+      }
+
+      const data = await res.json();
+      renderCharacterList(data);
     } catch (err) {
       console.error("キャラクター一覧取得エラー:", err);
       alert('キャラクター一覧を取得できませんでした。');
+    } finally {
+      getButton.disabled = false;
     }
-  });
+  }
+
+  /**
+   * キャラクター一覧を描画する
+   * @param {Array} data
+   */
+  function renderCharacterList(data) {
+    list.innerHTML = '';
+
+    if (data.length === 0) {
+      list.innerHTML = '<li>キャラクターが登録されていません。</li>';
+      return;
+    }
+
+    data.forEach((char) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <strong>ID：</strong> ${char.id} <br>
+        <strong>名前：</strong> ${char.name} <br>
+        <strong>特徴：</strong> ${char.description} <br>
+      `;
+      li.style.textAlign = "left";
+      list.appendChild(li);
+    });
+  }
 });
